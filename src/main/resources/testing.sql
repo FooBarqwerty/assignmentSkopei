@@ -3,7 +3,7 @@ CREATE SCHEMA public;
 GRANT ALL ON SCHEMA public TO foobar;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
-CREATE TABLE profile
+CREATE TABLE user_profile
 (
     id                 SERIAL PRIMARY KEY,
     name               TEXT,
