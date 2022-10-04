@@ -1,0 +1,13 @@
+version: '3'
+services:
+
+  postgres-db:
+    image: postgres
+    environment:
+      POSTGRES_USER: foobar
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: skopei
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
