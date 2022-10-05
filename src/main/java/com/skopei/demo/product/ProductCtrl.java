@@ -1,5 +1,7 @@
 package com.skopei.demo.product;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -9,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -53,14 +56,14 @@ public class ProductCtrl {
         return productDAO.readList();
     }
 
-    @PatchMapping
+    @PatchMapping(consumes = "application/json-patch+json")
     @Operation(summary = "update product",
             responses = {
                     @ApiResponse(description = "product update success",
                             responseCode = "200")
             })
-    public void updateProduct(@RequestBody Product product) {
-        productDAO.update(product);
+    public void updateProduct(@RequestParam int id, @RequestBody ObjectNode patchNode) throws IOException {
+        productDAO.update((new ObjectMapper()).readerForUpdating(productDAO.read(id)).readValue(patchNode));
     }
 
     @DeleteMapping

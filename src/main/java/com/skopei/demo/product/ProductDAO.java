@@ -51,15 +51,20 @@ public class ProductDAO implements ICRUD<Product> {
 
     @Override
     public void update(Product product) throws DataAccessException {
-
+        jdbcTemplate.update("""
+            UPDATE product
+            SET name=?, quantity=?, price_euro=?, date_modified=?
+            WHERE id = ?;
+        """, product.getName(), product.getQuantity(), product.getPrice(), System.currentTimeMillis(), product.getId());
     }
 
     @Override
     public void delete(int id) throws DataAccessException {
         jdbcTemplate.update("""
             UPDATE product
-            SET deleted = true
+            SET deleted = true,
+                date_modified=?
             WHERE id = ?;
-        """, id);
+        """, System.currentTimeMillis(), id);
     }
 }
