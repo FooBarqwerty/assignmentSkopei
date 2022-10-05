@@ -8,8 +8,8 @@ CREATE TABLE user_profile
     id                 SERIAL PRIMARY KEY,
     name               TEXT,
     email              VARCHAR(255),
-    dateMod            DATE,
-    dateCreated        DATE,
+    date_modified      BIGINT,
+    date_created       BIGINT,
     deleted            BOOLEAN NOT NULL DEFAULT FALSE
 );
 
@@ -18,8 +18,8 @@ CREATE TABLE product
     id                 SERIAL PRIMARY KEY,
     name               TEXT NOT NULL ,
     quantity           INT,
-    priceEuro          INT,
-    dateMod            DATE,
-    dateCreated        DATE,
+    price_euro         INT,
+    date_modified      BIGINT,
+    date_created       BIGINT,
     deleted            BOOLEAN NOT NULL DEFAULT FALSE
 );
