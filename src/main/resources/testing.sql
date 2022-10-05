@@ -23,3 +23,5 @@ CREATE TABLE product
     date_created       BIGINT,
     deleted            BOOLEAN NOT NULL DEFAULT FALSE
 );
+
+SELECT * from product;

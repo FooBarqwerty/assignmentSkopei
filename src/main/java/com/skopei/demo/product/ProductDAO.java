@@ -1,6 +1,6 @@
 package com.skopei.demo.product;
 
-import com.skopei.demo.abstraction.CRUD;
+import com.skopei.demo.abstraction.ICRUD;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class ProductDAO implements CRUD<Product> {
+public class ProductDAO implements ICRUD<Product> {
 
     private final JdbcTemplate jdbcTemplate;
     private final RowMapper<Product> productRowMapper = (resultSet, i) ->
@@ -32,7 +32,7 @@ public class ProductDAO implements CRUD<Product> {
         jdbcTemplate.update("""
             INSERT INTO product(
                 name, quantity, price_euro, date_modified, date_created
-            ) VALUES ( ?,?,?,?,?)
+            ) VALUES ( ?,?,?,?,?);
         """, product.getName(), product.getQuantity(), product.getPrice(), currentTime, currentTime);
     }
 
@@ -45,8 +45,8 @@ public class ProductDAO implements CRUD<Product> {
     }
 
     @Override
-    public List<Product> readList(int... ids) {
-        return null;
+    public List<Product> readList() {
+        return jdbcTemplate.query("SELECT * FROM product", productRowMapper);
     }
 
     @Override
@@ -56,6 +56,10 @@ public class ProductDAO implements CRUD<Product> {
 
     @Override
     public void delete(int id) throws DataAccessException {
-
+        jdbcTemplate.update("""
+            UPDATE product
+            SET deleted = true
+            WHERE id = ?;
+        """, id);
     }
 }
