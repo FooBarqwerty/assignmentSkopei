@@ -8,3 +8,5 @@ $ docker compose up
 $ mvn install
 $ 
 ```
+### 3) documentation is available at
+http://localhost:8080/swagger-ui/index.html#/

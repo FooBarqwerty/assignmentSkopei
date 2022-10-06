@@ -13,7 +13,7 @@ public class SwaggerConfig {
         Info info = new Info();
         info
                 .title("Skopei API")
-                .description("exercise api")
+                .description("Assignment api")
                 .version("v1.0.0");
         return new OpenAPI().info(info);
     }
