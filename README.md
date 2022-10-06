@@ -12,5 +12,4 @@ $ mvn spring-boot:run
 ### 3) documentation is available at
 http://localhost:8080/swagger-ui/index.html#/
 
-username: admin
-password: password
+username: admin, password: password
