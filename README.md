@@ -7,7 +7,6 @@ $ docker compose up
 
 ### 2) build and run the java project
 ```shell
-$ mvn install
 $ mvn spring-boot:run
 ```
 ### 3) documentation is available at
