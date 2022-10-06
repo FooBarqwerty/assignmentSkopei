@@ -57,7 +57,7 @@ public class UserDAO implements ICRUD<UserProfile> {
                     SET name=?, email=?, date_modified=?
                     WHERE id = ?;
                 """;
-        jdbcTemplate.update(sql, userProfile.getName(), userProfile.getEmail(), System.currentTimeMillis());
+        jdbcTemplate.update(sql, userProfile.getName(), userProfile.getEmail(), System.currentTimeMillis(), userProfile.getId());
     }
 
     @Override
